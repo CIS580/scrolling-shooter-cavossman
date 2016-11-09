@@ -57,21 +57,15 @@ BulletPool.prototype.update = function(elapsedTime, callback) {
     // Move the bullet
     this.pool[4*i] += this.pool[4*i+2];
     this.pool[4*i+1] += this.pool[4*i+3];
-    // If a callback was supplied, call it
     if(callback && callback({
       x: this.pool[4*i],
       y: this.pool[4*i+1]
     })) {
-      // Swap the current and last bullet if we
-      // need to remove the current bullet
       this.pool[4*i] = this.pool[4*(this.end-1)];
       this.pool[4*i+1] = this.pool[4*(this.end-1)+1];
       this.pool[4*i+2] = this.pool[4*(this.end-1)+2];
       this.pool[4*i+3] = this.pool[4*(this.end-1)+3];
-      // Reduce the total number of bullets by 1
       this.end--;
-      // Reduce our iterator by 1 so that we update the
-      // freshly swapped bullet.
       i--;
     }
   }
